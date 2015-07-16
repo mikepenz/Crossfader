@@ -3,6 +3,13 @@
 
 **Crossfader**
 
+
+
+# PLACEHOLDER REPO
+* more infos abou this to follow
+
+
+
 #Preview
 ##Demo
 To follow
@@ -28,10 +35,6 @@ compile('com.mikepenz:crossfader:0.0.1-SNAPSHOT@aar') {
 ```
 
 ##How to use
-###CrossfaderBuilder
-
-```java
-```
 
 #Developed By
 
