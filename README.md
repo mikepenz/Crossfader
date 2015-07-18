@@ -29,7 +29,7 @@ The Crossfader Library is pushed to [Maven Central](http://search.maven.org/#sea
 //maven snapshot repo:
 maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 
-compile('com.mikepenz:crossfader:0.0.1@aar') {
+compile('com.mikepenz:crossfader:0.0.2@aar') {
 	transitive = true
 }
 ```
