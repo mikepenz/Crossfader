@@ -128,6 +128,7 @@ public class SimpleActivity extends AppCompatActivity {
                 .withContent(findViewById(R.id.crossfade_content))
                 .withFirst(result.getSlider(), firstWidth)
                 .withSecond(miniResult.build(this), secondWidth)
+                .withSavedInstance(savedInstanceState)
                 .build();
 
         //TODO FIND CLEAN SOLUTION
@@ -140,6 +141,8 @@ public class SimpleActivity extends AppCompatActivity {
         outState = result.saveInstanceState(outState);
         //add the values which need to be saved from the accountHeader to the bundle
         outState = headerResult.saveInstanceState(outState);
+        //add the values which need to be saved from the crossFader to the bundle
+        outState = crossFader.saveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 

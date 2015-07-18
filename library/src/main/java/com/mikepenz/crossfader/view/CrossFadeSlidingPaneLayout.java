@@ -54,9 +54,6 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
         super.setPanelSlideListener(crossFadeListener);
     }
 
-    public void init() {
-    }
-
     @Override
     public void setPanelSlideListener(final PanelSlideListener listener) {
         if (listener == null) {
