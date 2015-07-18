@@ -1,6 +1,5 @@
 package com.mikepenz.crossfader.app;
 
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.mikepenz.crossfader.Crossfader;
+import com.mikepenz.crossfader.util.UIUtils;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -31,7 +31,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialize.MaterializeBuilder;
 import com.mikepenz.materialize.color.Material;
-import com.mikepenz.materialize.util.SystemUtils;
 
 public class SimpleActivity extends AppCompatActivity {
     private static final int PROFILE_SETTING = 1;
@@ -75,11 +74,9 @@ public class SimpleActivity extends AppCompatActivity {
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        if (SystemUtils.getScreenOrientation() == Configuration.ORIENTATION_LANDSCAPE) {
-                            if (!crossFader.isCrossFaded()) {
-                                crossFader.crossFade();
-                                miniResult.update();
-                            }
+                        if (crossFader.isCrossFaded()) {
+                            crossFader.crossFade();
+                            miniResult.update();
                         }
 
                         //false if you have not consumed the event and it should close the drawer
@@ -110,7 +107,7 @@ public class SimpleActivity extends AppCompatActivity {
                             Toast.makeText(SimpleActivity.this, ((Nameable) drawerItem).getName().getText(SimpleActivity.this), Toast.LENGTH_SHORT).show();
                         }
 
-                        if (!crossFader.isCrossFaded()) {
+                        if (crossFader.isCrossFaded()) {
                             crossFader.crossFade();
                             miniResult.update();
                         }
@@ -124,14 +121,17 @@ public class SimpleActivity extends AppCompatActivity {
         result = builder.buildView();
         miniResult = new MiniDrawer().withDrawer(result).withAccountHeader(headerResult);
 
+        int firstWidth = (int) UIUtils.convertDpToPixel(200, this);
+        int secondWidth = (int) UIUtils.convertDpToPixel(72, this);
+
         crossFader = new Crossfader()
-                .withGeneratedStructure(findViewById(R.id.crossfade_content), result.getSlider(), miniResult.build(this))
-                .withPanelWidthsDp(360, 72)
+                .withContent(findViewById(R.id.crossfade_content))
+                .withFirst(result.getSlider(), firstWidth)
+                .withSecond(miniResult.build(this), secondWidth)
                 .build();
 
         //TODO FIND CLEAN SOLUTION
         //miniResult.withCrossFader(crossFader);
-
     }
 
     @Override
