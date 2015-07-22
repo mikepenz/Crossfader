@@ -73,6 +73,30 @@ public class Crossfader {
         return this;
     }
 
+    public CrossFadeSlidingPaneLayout getCrossFadeSlidingPaneLayout() {
+        return mCrossFadeSlidingPaneLayout;
+    }
+
+    public View getContent() {
+        return mContent;
+    }
+
+    public View getFirst() {
+        return mFirst;
+    }
+
+    public int getFirstWidth() {
+        return mFirstWidth;
+    }
+
+    public View getSecond() {
+        return mSecond;
+    }
+
+    public int getSecondWidth() {
+        return mSecondWidth;
+    }
+
     public Crossfader build() {
         if (mFirstWidth < mSecondWidth) {
             throw new RuntimeException("the first layout has to be the layout with the greater width");
