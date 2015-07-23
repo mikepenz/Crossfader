@@ -51,10 +51,10 @@ android {
 dependencies {
     compile project(':library')
 
-    compile('com.mikepenz:materialdrawer:4.0.0.b4-SNAPSHOT@aar') {
+    compile('com.mikepenz:materialdrawer:4.0.0.b7-SNAPSHOT@aar') {
         transitive = true
     }
-    compile('com.mikepenz:aboutlibraries:5.0.5@aar') {
+    compile('com.mikepenz:aboutlibraries:5.0.9@aar') {
         transitive = true
     }
 
