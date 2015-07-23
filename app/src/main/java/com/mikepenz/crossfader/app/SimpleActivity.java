@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.mikepenz.crossfader.Crossfader;
+import com.mikepenz.crossfader.app.util.CrossfadeWrapper;
 import com.mikepenz.crossfader.util.UIUtils;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -74,10 +75,7 @@ public class SimpleActivity extends AppCompatActivity {
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        if (crossFader.isCrossFaded()) {
-                            crossFader.crossFade();
-                            miniResult.update();
-                        }
+                        miniResult.onProfileClick();
 
                         //false if you have not consumed the event and it should close the drawer
                         return false;
@@ -106,11 +104,7 @@ public class SimpleActivity extends AppCompatActivity {
                         if (drawerItem instanceof Nameable) {
                             Toast.makeText(SimpleActivity.this, ((Nameable) drawerItem).getName().getText(SimpleActivity.this), Toast.LENGTH_SHORT).show();
                         }
-
-                        if (crossFader.isCrossFaded()) {
-                            crossFader.crossFade();
-                            miniResult.update();
-                        }
+                        miniResult.onItemClick(drawerItem);
 
                         return true;
                     }
@@ -131,8 +125,7 @@ public class SimpleActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-        //TODO FIND CLEAN SOLUTION
-        //miniResult.withCrossFader(crossFader);
+        miniResult.withCrossFader(new CrossfadeWrapper(crossFader));
     }
 
     @Override
