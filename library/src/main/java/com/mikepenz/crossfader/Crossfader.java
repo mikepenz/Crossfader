@@ -1,7 +1,6 @@
 package com.mikepenz.crossfader;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
@@ -138,13 +137,10 @@ public class Crossfader {
 
         }
 
-        //make sure we hide the layout which is currently not shown
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            if (cross_faded) {
-                mCrossFadeSecond.setAlpha(0);
-            } else {
-                mCrossFadeFirst.setAlpha(0);
-            }
+        if (cross_faded) {
+            mCrossFadeSlidingPaneLayout.setOffset(1);
+        } else {
+            mCrossFadeSlidingPaneLayout.setOffset(0);
         }
 
         //define that we don't want a slider color

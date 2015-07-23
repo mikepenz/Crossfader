@@ -6,6 +6,7 @@ import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 
 /**
  * SlidingPaneLayout that is partially visible, with cross fade.
@@ -80,6 +81,7 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
         });
     }
 
+
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
@@ -89,9 +91,8 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
                 // "changed" means that views were added or removed
                 // we need to move the partial view out of the way in any case (if it's supposed to of course)
                 updatePartialViewVisibilityPreHoneycomb(isOpen());
-            } else {
-                partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
             }
+            partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
         }
     }
 
@@ -103,24 +104,38 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
                 return;
             }
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                if (slideOffset == 1 && !wasOpened) {
-                    // the layout was just opened, move the partial view off screen
-                    updatePartialViewVisibilityPreHoneycomb(true);
-                    wasOpened = true;
-                } else if (slideOffset < 1 && wasOpened) {
-                    // the layout just started to close, move the partial view back, so it can be shown animating
-                    updatePartialViewVisibilityPreHoneycomb(false);
-                    wasOpened = false;
-                }
-            } else {
-                partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
-
-                partialView.setAlpha(1 - slideOffset);
-                fullView.setAlpha(slideOffset);
-            }
+            setOffset(slideOffset);
         }
     };
+
+    public void setOffset(float slideOffset) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            if (slideOffset == 1 && !wasOpened) {
+                // the layout was just opened, move the partial view off screen
+                updatePartialViewVisibilityPreHoneycomb(true);
+                wasOpened = true;
+            } else if (slideOffset < 1 && wasOpened) {
+                // the layout just started to close, move the partial view back, so it can be shown animating
+                updatePartialViewVisibilityPreHoneycomb(false);
+                wasOpened = false;
+            }
+
+            updateAlphaApi10(partialView, 1 - slideOffset);
+            updateAlphaApi10(fullView, slideOffset);
+        } else {
+            partialView.setAlpha(1 - slideOffset);
+            fullView.setAlpha(slideOffset);
+        }
+        partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
+
+    }
+
+    private void updateAlphaApi10(View v, float value) {
+        AlphaAnimation alpha = new AlphaAnimation(value, value);
+        alpha.setDuration(0); // Make animation instant
+        alpha.setFillAfter(true); // Tell it to persist after the animation ends
+        v.startAnimation(alpha);
+    }
 
     private void updatePartialViewVisibilityPreHoneycomb(boolean slidingPaneOpened) {
         // below API 11 the top view must be moved so it does not consume clicks intended for the bottom view
