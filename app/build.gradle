@@ -57,6 +57,7 @@ dependencies {
     compile('com.mikepenz:aboutlibraries:5.1.0@aar') {
         transitive = true
     }
+    compile 'com.mikepenz:iconics:1.5.2@aar'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 }
