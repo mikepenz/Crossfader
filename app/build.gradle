@@ -13,8 +13,8 @@ android {
         applicationId "com.mikepenz.crossfader.app"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 100
-        versionName '1.0.0'
+        versionCode 101
+        versionName '1.0.1'
 
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
@@ -51,10 +51,10 @@ android {
 dependencies {
     compile project(':library')
 
-    compile('com.mikepenz:materialdrawer:4.0.0.b7-SNAPSHOT@aar') {
+    compile('com.mikepenz:materialdrawer:4.0.0.rc5-SNAPSHOT@aar') {
         transitive = true
     }
-    compile('com.mikepenz:aboutlibraries:5.0.9@aar') {
+    compile('com.mikepenz:aboutlibraries:5.1.0@aar') {
         transitive = true
     }
 
