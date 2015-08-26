@@ -1,6 +1,7 @@
 package com.mikepenz.crossfader;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
@@ -183,6 +184,12 @@ public class Crossfader {
     public void setLeftMargin(View view, int leftMargin) {
         SlidingPaneLayout.LayoutParams lp = (SlidingPaneLayout.LayoutParams) view.getLayoutParams();
         lp.leftMargin = leftMargin;
+        lp.rightMargin = 0;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            lp.setMarginStart(leftMargin);
+            lp.setMarginEnd(0);
+        }
         view.setLayoutParams(lp);
     }
 }
