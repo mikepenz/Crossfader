@@ -13,8 +13,8 @@ android {
         applicationId "com.mikepenz.crossfader.app"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 103
-        versionName '1.0.3'
+        versionCode 105
+        versionName '1.0.5'
 
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
@@ -51,14 +51,14 @@ android {
 dependencies {
     compile project(':library')
 
-    compile('com.mikepenz:materialdrawer:4.0.0.rc11-SNAPSHOT@aar') {
+    compile('com.mikepenz:materialdrawer:4.0.5@aar') {
         transitive = true
     }
-    compile('com.mikepenz:aboutlibraries:5.1.1@aar') {
+    compile('com.mikepenz:aboutlibraries:5.2.1@aar') {
         transitive = true
     }
-    compile 'com.mikepenz:google-material-typeface:1.2.0@aar'
-    compile 'com.mikepenz:fontawesome-typeface:4.4.0@aar'
+    compile 'com.mikepenz:google-material-typeface:1.2.0.1@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.4.0.1@aar'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 }
