@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,103 @@ public class Crossfader {
         return this;
     }
 
+    // enable the panelSlide
+    protected boolean mCanSlide = true;
+
+    /**
+     * Allow the panel to slide
+     *
+     * @param canSlide
+     * @return
+     */
+    public Crossfader withCanSlide(boolean canSlide) {
+        this.mCanSlide = canSlide;
+        if (mCrossFadeSlidingPaneLayout != null) {
+            mCrossFadeSlidingPaneLayout.setEnablePanelSlide(mCanSlide);
+        }
+        return this;
+    }
+
+    //a panelSlideListener
+    protected SlidingPaneLayout.PanelSlideListener mPanelSlideListener;
+
+    /**
+     * set a PanelSlideListener used with the CrossFadeSlidingPaneLayout
+     *
+     * @param panelSlideListener
+     * @return
+     */
+    public Crossfader withPanelSlideListener(SlidingPaneLayout.PanelSlideListener panelSlideListener) {
+        this.mPanelSlideListener = panelSlideListener;
+        if (mCrossFadeSlidingPaneLayout != null) {
+            mCrossFadeSlidingPaneLayout.setPanelSlideListener(mPanelSlideListener);
+        }
+        return this;
+    }
+
+    // if enabled we use a PanelSlideListener to resize the content panel instead of moving it out
+    protected boolean mResizeContentPanel = false;
+
+    /**
+     * if enabled we use a PanelSlideListener to resize the content panel instead of moving it out
+     *
+     * @param resizeContentPanel
+     * @return
+     */
+    public Crossfader withResizeContentPanel(boolean resizeContentPanel) {
+        this.mResizeContentPanel = resizeContentPanel;
+        enableResizeContentPanel(mResizeContentPanel);
+        return this;
+    }
+
+
+    /**
+     *
+     */
+    private void enableResizeContentPanel(boolean enable) {
+        if (enable) {
+            //activate the resizeFunction
+            DisplayMetrics displaymetrics = getContent().getContext().getResources().getDisplayMetrics();
+            final int screenWidth = displaymetrics.widthPixels;
+
+            ViewGroup.LayoutParams lp = getContent().getLayoutParams();
+            lp.width = screenWidth - getSecondWidth();
+            getContent().setLayoutParams(lp);
+
+            if (mCrossFadeSlidingPaneLayout != null) {
+                mCrossFadeSlidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {
+                    @Override
+                    public void onPanelSlide(View panel, float slideOffset) {
+                        ViewGroup.LayoutParams lp = getContent().getLayoutParams();
+                        lp.width = (int) (screenWidth - getSecondWidth() - ((getFirstWidth() - getSecondWidth()) * slideOffset));
+                        getContent().setLayoutParams(lp);
+
+                        mPanelSlideListener.onPanelSlide(panel, slideOffset);
+                    }
+
+                    @Override
+                    public void onPanelOpened(View panel) {
+                        mPanelSlideListener.onPanelOpened(panel);
+                    }
+
+                    @Override
+                    public void onPanelClosed(View panel) {
+                        mPanelSlideListener.onPanelClosed(panel);
+                    }
+                });
+            }
+        } else {
+            //reset the resizeFunction
+            ViewGroup.LayoutParams lp = getContent().getLayoutParams();
+            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            getContent().setLayoutParams(lp);
+
+            if (mCrossFadeSlidingPaneLayout != null) {
+                mCrossFadeSlidingPaneLayout.setPanelSlideListener(mPanelSlideListener);
+            }
+        }
+    }
+
     public CrossFadeSlidingPaneLayout getCrossFadeSlidingPaneLayout() {
         return mCrossFadeSlidingPaneLayout;
     }
@@ -96,6 +194,7 @@ public class Crossfader {
     public int getSecondWidth() {
         return mSecondWidth;
     }
+
 
     public Crossfader build() {
         if (mFirstWidth < mSecondWidth) {
@@ -135,7 +234,6 @@ public class Crossfader {
         boolean cross_faded = false;
         if (mSavedInstance != null) {
             cross_faded = mSavedInstance.getBoolean(BUNDLE_CROSS_FADED, false);
-
         }
 
         if (cross_faded) {
@@ -144,8 +242,14 @@ public class Crossfader {
             mCrossFadeSlidingPaneLayout.setOffset(0);
         }
 
+        //set the PanelSlideListener for the CrossFadeSlidingPaneLayout
+        mCrossFadeSlidingPaneLayout.setPanelSlideListener(mPanelSlideListener);
+
         //define that we don't want a slider color
         mCrossFadeSlidingPaneLayout.setSliderFadeColor(Color.TRANSPARENT);
+
+        //enable / disable the resize functionality
+        enableResizeContentPanel(mResizeContentPanel);
 
         return this;
     }
