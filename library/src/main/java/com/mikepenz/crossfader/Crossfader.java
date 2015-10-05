@@ -86,7 +86,7 @@ public class Crossfader {
     public Crossfader withCanSlide(boolean canSlide) {
         this.mCanSlide = canSlide;
         if (mCrossFadeSlidingPaneLayout != null) {
-            mCrossFadeSlidingPaneLayout.setEnablePanelSlide(mCanSlide);
+            mCrossFadeSlidingPaneLayout.setCanSlide(mCanSlide);
         }
         return this;
     }
