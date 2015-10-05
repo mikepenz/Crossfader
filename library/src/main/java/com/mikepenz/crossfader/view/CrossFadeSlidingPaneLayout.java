@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -19,6 +20,8 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
     // helper flag pre honeycomb used in visibility and click response handling
     // helps avoid unnecessary layouts
     private boolean wasOpened = false;
+
+    private boolean mCanSlide = true;
 
     public CrossFadeSlidingPaneLayout(Context context) {
         super(context);
@@ -107,6 +110,20 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
             setOffset(slideOffset);
         }
     };
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return mCanSlide && super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return mCanSlide && super.onTouchEvent(ev);
+    }
+
+    public void setCanSlide(boolean canSlide) {
+        this.mCanSlide = canSlide;
+    }
 
     public void setOffset(float slideOffset) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
