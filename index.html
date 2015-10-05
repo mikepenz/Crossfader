@@ -59,7 +59,7 @@
 
 <p>The Crossfader Library is pushed to <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.mikepenz%22">Maven Central</a>, so you just need to add the following dependency to your <code>build.gradle</code>.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-en">compile</span>(<span class="pl-s"><span class="pl-pds">'</span>com.mikepenz:crossfader:1.0.5@aar<span class="pl-pds">'</span></span>) {
+<div class="highlight highlight-source-js"><pre><span class="pl-en">compile</span>(<span class="pl-s"><span class="pl-pds">'</span>com.mikepenz:crossfader:1.1.0@aar<span class="pl-pds">'</span></span>) {
     transitive <span class="pl-k">=</span> <span class="pl-c1">true</span>
 }</pre></div>
 
@@ -68,7 +68,7 @@
 
 <p>Initialize and create the Crossfader</p>
 
-<div class="highlight highlight-java"><pre>crossFader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Crossfader</span>()
+<div class="highlight highlight-source-java"><pre>crossFader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Crossfader</span>()
     <span class="pl-c">//provide the view which should be the main content</span>
         .withContent(findViewById(<span class="pl-smi">R</span><span class="pl-k">.</span>id<span class="pl-k">.</span>crossfade_content))
         <span class="pl-c">//provide the view and it's width (in pixels) which should be displayed first</span>
@@ -83,7 +83,7 @@
 
 <p>Programmatically crossFade the view</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-c">//check if the view is crossFaded</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-c">//check if the view is crossFaded</span>
 <span class="pl-k">if</span> (crossFader<span class="pl-k">.</span>isCrossFaded()) {
     <span class="pl-c">//crossFade the view</span>
     crossFader<span class="pl-k">.</span>crossFade();
@@ -91,7 +91,7 @@
 
 <p>Save the instance state</p>
 
-<div class="highlight highlight-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
 <span class="pl-k">protected</span> <span class="pl-k">void</span> onSaveInstanceState(<span class="pl-smi">Bundle</span> outState) {
     <span class="pl-c">//add the values which need to be saved from the crossFader to the bundle</span>
     outState <span class="pl-k">=</span> crossFader<span class="pl-k">.</span>saveInstanceState(outState);
