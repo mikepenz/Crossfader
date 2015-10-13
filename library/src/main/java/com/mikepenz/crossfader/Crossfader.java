@@ -209,6 +209,7 @@ public class Crossfader {
 
         //create the cross fader container
         mCrossFadeSlidingPaneLayout = (CrossFadeSlidingPaneLayout) LayoutInflater.from(mContent.getContext()).inflate(R.layout.crossfader_base, container, false);
+        mCrossFadeSlidingPaneLayout.setCanSlide(mCanSlide);
         container.addView(mCrossFadeSlidingPaneLayout);
 
         //find the container layouts
