@@ -25,11 +25,16 @@ public class Crossfader {
     private CrossFadeSlidingPaneLayout mCrossFadeSlidingPaneLayout;
 
     public Crossfader() {
-
     }
 
     private View mContent = null;
 
+    /**
+     * define the content which is shown on the right of the crossfader
+     *
+     * @param content
+     * @return
+     */
     public Crossfader withContent(View content) {
         this.mContent = content;
         return this;
@@ -38,6 +43,13 @@ public class Crossfader {
     private View mFirst = null;
     private int mFirstWidth = -1;
 
+    /**
+     * define the default (first) view of the crossfader
+     *
+     * @param first
+     * @param width
+     * @return
+     */
     public Crossfader withFirst(View first, int width) {
         this.mFirst = first;
         this.mFirstWidth = width;
@@ -47,12 +59,28 @@ public class Crossfader {
     private View mSecond = null;
     private int mSecondWidth = -1;
 
+    /**
+     * define the slided (second) view of the crossfader
+     *
+     * @param first
+     * @param width
+     * @return
+     */
     public Crossfader withSecond(View first, int width) {
         this.mSecond = first;
         this.mSecondWidth = width;
         return this;
     }
 
+    /**
+     * define the default view and the slided view of the crossfader
+     *
+     * @param first
+     * @param firstWidth
+     * @param second
+     * @param secondWidth
+     * @return
+     */
     public Crossfader withStructure(View first, int firstWidth, View second, int secondWidth) {
         withFirst(first, firstWidth);
         withSecond(second, secondWidth);
@@ -125,7 +153,7 @@ public class Crossfader {
 
 
     /**
-     *
+     * a small helper class to enable resizing of the content panel / or keep the default behavior
      */
     private void enableResizeContentPanel(boolean enable) {
         if (enable) {
@@ -175,27 +203,48 @@ public class Crossfader {
         return mCrossFadeSlidingPaneLayout;
     }
 
+    /**
+     * @return the content view
+     */
     public View getContent() {
         return mContent;
     }
 
+    /**
+     * @return the first (default) view
+     */
     public View getFirst() {
         return mFirst;
     }
 
+    /**
+     * @return the width of the first (default) view
+     */
     public int getFirstWidth() {
         return mFirstWidth;
     }
 
+    /**
+     * @return the second (slided) view
+     */
     public View getSecond() {
         return mSecond;
     }
 
+    /**
+     * @return the width of the second (slided) view
+     */
     public int getSecondWidth() {
         return mSecondWidth;
     }
 
 
+    /**
+     * builds the crossfader and it's content views
+     * will define all properties and define and add the layouts
+     *
+     * @return
+     */
     public Crossfader build() {
         if (mFirstWidth < mSecondWidth) {
             throw new RuntimeException("the first layout has to be the layout with the greater width");
@@ -245,6 +294,9 @@ public class Crossfader {
         //set the PanelSlideListener for the CrossFadeSlidingPaneLayout
         mCrossFadeSlidingPaneLayout.setPanelSlideListener(mPanelSlideListener);
 
+        //set the ability to slide
+        mCrossFadeSlidingPaneLayout.setCanSlide(mCanSlide);
+
         //define that we don't want a slider color
         mCrossFadeSlidingPaneLayout.setSliderFadeColor(Color.TRANSPARENT);
 
@@ -254,10 +306,18 @@ public class Crossfader {
         return this;
     }
 
+    /**
+     * returns if the crossfader is currently opened (the second view is shown)
+     *
+     * @return
+     */
     public boolean isCrossFaded() {
         return mCrossFadeSlidingPaneLayout.isOpen();
     }
 
+    /**
+     * crossfade the current crossfader (toggle between first and second view)
+     */
     public void crossFade() {
         if (mCrossFadeSlidingPaneLayout.isOpen()) {
             mCrossFadeSlidingPaneLayout.closePane();
@@ -279,13 +339,25 @@ public class Crossfader {
         return savedInstanceState;
     }
 
-    public void setWidth(View view, int width) {
+    /**
+     * define the width of the given view
+     *
+     * @param view
+     * @param width
+     */
+    protected void setWidth(View view, int width) {
         ViewGroup.LayoutParams lp = view.getLayoutParams();
         lp.width = width;
         view.setLayoutParams(lp);
     }
 
-    public void setLeftMargin(View view, int leftMargin) {
+    /**
+     * define the left margin of the given view
+     *
+     * @param view
+     * @param leftMargin
+     */
+    protected void setLeftMargin(View view, int leftMargin) {
         SlidingPaneLayout.LayoutParams lp = (SlidingPaneLayout.LayoutParams) view.getLayoutParams();
         lp.leftMargin = leftMargin;
         lp.rightMargin = 0;
