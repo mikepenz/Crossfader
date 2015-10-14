@@ -245,6 +245,9 @@ public class Crossfader {
         //set the PanelSlideListener for the CrossFadeSlidingPaneLayout
         mCrossFadeSlidingPaneLayout.setPanelSlideListener(mPanelSlideListener);
 
+        //set the ability to slide
+        mCrossFadeSlidingPaneLayout.setCanSlide(mCanSlide);
+
         //define that we don't want a slider color
         mCrossFadeSlidingPaneLayout.setSliderFadeColor(Color.TRANSPARENT);
 
