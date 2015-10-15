@@ -23,10 +23,10 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.MiniDrawer;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
@@ -34,8 +34,6 @@ import com.mikepenz.materialize.MaterializeBuilder;
 import com.mikepenz.materialize.color.Material;
 
 public class SimpleActivity extends AppCompatActivity {
-    private static final int PROFILE_SETTING = 1;
-
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -89,14 +87,14 @@ public class SimpleActivity extends AppCompatActivity {
                 .withTranslucentStatusBar(false)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_compact_header).withIcon(GoogleMaterial.Icon.gmd_wb_sunny).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_action_bar).withIcon(FontAwesome.Icon.faw_home).withIdentifier(2),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_multi_drawer).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_non_translucent_status_drawer).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4),
-                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_complex_header_drawer).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(5),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_simple_fragment_drawer).withIcon(GoogleMaterial.Icon.gmd_style).withIdentifier(6),
-                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_first).withIcon(GoogleMaterial.Icon.gmd_wb_sunny).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_second).withIcon(FontAwesome.Icon.faw_home).withIdentifier(2),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_third).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_fourth).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4),
+                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_fifth).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_sixth).withIcon(GoogleMaterial.Icon.gmd_style).withIdentifier(6),
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_seventh).withIcon(FontAwesome.Icon.faw_github)
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -111,13 +109,16 @@ public class SimpleActivity extends AppCompatActivity {
                 })
                 .withSavedInstance(savedInstanceState);
 
-        // Embed only if orientation is Landscape (regular drawer in Portrait)
+        // build only the view of the Drawer (don't inflate it automatically in our layout which is done with .build())
         result = builder.buildView();
+        // create the MiniDrawer and deinfe the drawer and header to be used (it will automatically use the items from them)
         miniResult = new MiniDrawer().withDrawer(result).withAccountHeader(headerResult);
 
+        //get the widths in px for the first and second panel
         int firstWidth = (int) UIUtils.convertDpToPixel(200, this);
         int secondWidth = (int) UIUtils.convertDpToPixel(72, this);
 
+        //create and build our crossfader (see the MiniDrawer is also builded in here, as the build method returns the view to be used in the crossfader)
         crossFader = new Crossfader()
                 .withContent(findViewById(R.id.crossfade_content))
                 .withFirst(result.getSlider(), firstWidth)
@@ -125,7 +126,11 @@ public class SimpleActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
+        //define the crossfader to be used with the miniDrawer. This is required to be able to automatically toggle open / close
         miniResult.withCrossFader(new CrossfadeWrapper(crossFader));
+
+        //define a shadow (this is only for normal LTR layouts if you have a RTL app you need to define the other one
+        crossFader.getCrossFadeSlidingPaneLayout().setShadowResourceLeft(R.drawable.material_drawer_shadow_left);
     }
 
     @Override
@@ -144,7 +149,6 @@ public class SimpleActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_sort).color(Color.WHITE).actionBar());
-
         return true;
     }
 
