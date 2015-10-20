@@ -114,6 +114,9 @@ public class SimpleActivity extends AppCompatActivity {
         // create the MiniDrawer and deinfe the drawer and header to be used (it will automatically use the items from them)
         miniResult = new MiniDrawer().withDrawer(result).withAccountHeader(headerResult);
 
+
+        //IMPORTANT Crossfader specific implementation starts here (everything above is MaterialDrawer):
+
         //get the widths in px for the first and second panel
         int firstWidth = (int) UIUtils.convertDpToPixel(200, this);
         int secondWidth = (int) UIUtils.convertDpToPixel(72, this);

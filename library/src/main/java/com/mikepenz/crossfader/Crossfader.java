@@ -173,17 +173,23 @@ public class Crossfader {
                         lp.width = (int) (screenWidth - getSecondWidth() - ((getFirstWidth() - getSecondWidth()) * slideOffset));
                         getContent().setLayoutParams(lp);
 
-                        mPanelSlideListener.onPanelSlide(panel, slideOffset);
+                        if (mPanelSlideListener != null) {
+                            mPanelSlideListener.onPanelSlide(panel, slideOffset);
+                        }
                     }
 
                     @Override
                     public void onPanelOpened(View panel) {
-                        mPanelSlideListener.onPanelOpened(panel);
+                        if (mPanelSlideListener != null) {
+                            mPanelSlideListener.onPanelOpened(panel);
+                        }
                     }
 
                     @Override
                     public void onPanelClosed(View panel) {
-                        mPanelSlideListener.onPanelClosed(panel);
+                        if (mPanelSlideListener != null) {
+                            mPanelSlideListener.onPanelClosed(panel);
+                        }
                     }
                 });
             }
