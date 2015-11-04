@@ -13,14 +13,13 @@ import android.view.animation.AlphaAnimation;
  * SlidingPaneLayout that is partially visible, with cross fade.
  * https://github.com/chiuki/sliding-pane-layout
  */
-public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout {
+public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICrossFadeSlidingPaneLayout {
     private View partialView = null;
     private View fullView = null;
 
     // helper flag pre honeycomb used in visibility and click response handling
     // helps avoid unnecessary layouts
     private boolean wasOpened = false;
-
     private boolean mCanSlide = true;
 
     public CrossFadeSlidingPaneLayout(Context context) {

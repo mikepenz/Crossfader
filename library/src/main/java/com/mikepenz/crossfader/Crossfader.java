@@ -3,6 +3,7 @@ package com.mikepenz.crossfader;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -11,20 +12,34 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.mikepenz.crossfader.view.CrossFadeSlidingPaneLayout;
+import com.mikepenz.crossfader.view.ICrossFadeSlidingPaneLayout;
 
 /**
  * Created by mikepenz on 15.07.15.
  */
-public class Crossfader {
+public class Crossfader<T extends SlidingPaneLayout & ICrossFadeSlidingPaneLayout> {
     /**
      * BUNDLE param to store the selection
      */
     protected static final String BUNDLE_CROSS_FADED = "bundle_cross_faded";
 
-    private CrossFadeSlidingPaneLayout mCrossFadeSlidingPaneLayout;
+    private T mCrossFadeSlidingPaneLayout;
 
     public Crossfader() {
+    }
+
+    private int mBaseLayout = R.layout.crossfader_base;
+
+    /**
+     * defines the base layout to be used for this crossfader
+     * look at the sample definition of the crossfader_base
+     *
+     * @param baseLayout
+     * @return
+     */
+    public Crossfader withBaseLayout(@LayoutRes int baseLayout) {
+        this.mBaseLayout = baseLayout;
+        return this;
     }
 
     private View mContent = null;
@@ -205,7 +220,7 @@ public class Crossfader {
         }
     }
 
-    public CrossFadeSlidingPaneLayout getCrossFadeSlidingPaneLayout() {
+    public T getCrossFadeSlidingPaneLayout() {
         return mCrossFadeSlidingPaneLayout;
     }
 
@@ -263,7 +278,7 @@ public class Crossfader {
         container.removeView(mContent);
 
         //create the cross fader container
-        mCrossFadeSlidingPaneLayout = (CrossFadeSlidingPaneLayout) LayoutInflater.from(mContent.getContext()).inflate(R.layout.crossfader_base, container, false);
+        mCrossFadeSlidingPaneLayout = (T) LayoutInflater.from(mContent.getContext()).inflate(R.layout.crossfader_base, container, false);
         container.addView(mCrossFadeSlidingPaneLayout);
 
         //find the container layouts
