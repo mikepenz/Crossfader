@@ -278,7 +278,7 @@ public class Crossfader<T extends SlidingPaneLayout & ICrossFadeSlidingPaneLayou
         container.removeView(mContent);
 
         //create the cross fader container
-        mCrossFadeSlidingPaneLayout = (T) LayoutInflater.from(mContent.getContext()).inflate(R.layout.crossfader_base, container, false);
+        mCrossFadeSlidingPaneLayout = (T) LayoutInflater.from(mContent.getContext()).inflate(mBaseLayout, container, false);
         container.addView(mCrossFadeSlidingPaneLayout);
 
         //find the container layouts
