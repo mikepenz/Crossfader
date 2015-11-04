@@ -1,4 +1,4 @@
-package com.mikepenz.crossfader.view;
+package com.mikepenz.crossfader.app;
 
 import android.content.Context;
 import android.os.Build;
@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 
+import com.mikepenz.crossfader.view.ICrossFadeSlidingPaneLayout;
+
 /**
  * SlidingPaneLayout that is partially visible, with cross fade.
  * https://github.com/chiuki/sliding-pane-layout
  */
-public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICrossFadeSlidingPaneLayout {
+public class CustomCrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICrossFadeSlidingPaneLayout {
     private View partialView = null;
     private View fullView = null;
 
@@ -22,15 +24,15 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
     private boolean wasOpened = false;
     private boolean mCanSlide = true;
 
-    public CrossFadeSlidingPaneLayout(Context context) {
+    public CustomCrossFadeSlidingPaneLayout(Context context) {
         super(context);
     }
 
-    public CrossFadeSlidingPaneLayout(Context context, AttributeSet attrs) {
+    public CustomCrossFadeSlidingPaneLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CrossFadeSlidingPaneLayout(Context context, AttributeSet attrs, int defStyle) {
+    public CustomCrossFadeSlidingPaneLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
