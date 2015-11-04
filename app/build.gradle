@@ -51,10 +51,10 @@ android {
 dependencies {
     compile project(':library')
 
-    compile('com.mikepenz:materialdrawer:4.3.6@aar') {
+    compile('com.mikepenz:materialdrawer:4.4.5@aar') {
         transitive = true
     }
-    compile('com.mikepenz:aboutlibraries:5.2.4@aar') {
+    compile('com.mikepenz:aboutlibraries:5.3.1@aar') {
         transitive = true
     }
     compile 'com.mikepenz:google-material-typeface:1.2.0.1@aar'
