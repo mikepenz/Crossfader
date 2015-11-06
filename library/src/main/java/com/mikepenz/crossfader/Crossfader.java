@@ -42,6 +42,17 @@ public class Crossfader<T extends SlidingPaneLayout & ICrossFadeSlidingPaneLayou
         return this;
     }
 
+    /**
+     * Gmail android app (as of version autumn 2015) has custom swiping:
+     * <br/> when drawer is closed, only left pane is swipeable (content swiping is blocked)
+     * <br/> when drawer is opened, all swiping gestures goes to crossfader
+     * @return
+     */
+    public Crossfader withGmailStyleSwiping() {
+        this.mBaseLayout = R.layout.crossfader_gmail_style;
+        return this;
+    }
+
     private View mContent = null;
 
     /**
