@@ -126,6 +126,7 @@ public class SimpleActivity extends AppCompatActivity {
                 .withContent(findViewById(R.id.crossfade_content))
                 .withFirst(result.getSlider(), firstWidth)
                 .withSecond(miniResult.build(this), secondWidth)
+                .withGmailStyleSwiping()
                 .withSavedInstance(savedInstanceState)
                 .build();
 
