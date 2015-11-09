@@ -30,15 +30,17 @@ public class GmailStyleCrossFadeSlidingPaneLayout extends CrossFadeSlidingPaneLa
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (isOutOfSecond(ev))
-            return true;
+        if (isOutOfSecond(ev)) {
+            return false;
+        }
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (isOutOfSecond(ev))
-            return true;
+        if (isOutOfSecond(ev)) {
+            return false;
+        }
         return super.onTouchEvent(ev);
     }
 
