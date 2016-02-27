@@ -10,7 +10,7 @@
         <b>Crossfader</b>
         ]]>
     </string>
-    <string name="library_crossfader_libraryVersion">1.3.3</string>
+    <string name="library_crossfader_libraryVersion">1.3.4</string>
     <string name="library_crossfader_libraryWebsite">https://github.com/mikepenz/Crossfader</string>
     <string name="library_crossfader_licenseId">apache_2_0</string>
     <string name="library_crossfader_isOpenSource">true</string>
