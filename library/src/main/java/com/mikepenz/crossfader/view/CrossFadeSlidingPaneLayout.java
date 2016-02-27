@@ -144,8 +144,36 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
         }
         partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
 
+        //if the fullView is hidden we prevent the click on all its views and subviews
+        //otherwhise enable it again
+        if (slideOffset == 0 && fullView.isEnabled() || slideOffset != 0 && !fullView.isEnabled()) {
+            enableDisableView(fullView, slideOffset != 0);
+        }
     }
 
+    /**
+     * helper method to disable a view and all its subviews
+     *
+     * @param view
+     * @param enabled
+     */
+    private void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
+    }
+
+    /**
+     * set the alpha on API 10 devices
+     *
+     * @param v
+     * @param value
+     */
     private void updateAlphaApi10(View v, float value) {
         AlphaAnimation alpha = new AlphaAnimation(value, value);
         alpha.setDuration(0); // Make animation instant
@@ -153,6 +181,11 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
         v.startAnimation(alpha);
     }
 
+    /**
+     * set the view visibility on pre honeycomb
+     *
+     * @param slidingPaneOpened
+     */
     private void updatePartialViewVisibilityPreHoneycomb(boolean slidingPaneOpened) {
         // below API 11 the top view must be moved so it does not consume clicks intended for the bottom view
         // this applies curiously even when setting its visibility to GONE
