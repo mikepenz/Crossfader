@@ -55,6 +55,22 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
         partialView = viewGroup.getChildAt(1);
 
         super.setPanelSlideListener(crossFadeListener);
+
+        //make sure we prevent click on the fullView when we create the crossfader
+        //just do this if we are not opened
+        if (!isOpen()) {
+            enableDisableView(fullView, false);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            fullView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+                @Override
+                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                    if (!isOpen()) {
+                        enableDisableView(v, false);
+                    }
+                }
+            });
+        }
     }
 
     @Override
