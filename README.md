@@ -22,7 +22,7 @@ It comes with following features:
 The Crossfader Library is pushed to [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.mikepenz%22), so you just need to add the following dependency to your `build.gradle`.
 
 ```javascript
-compile('com.mikepenz:crossfader:1.3.5@aar') {
+compile('com.mikepenz:crossfader:1.3.6@aar') {
 	transitive = true
 }
 ```
