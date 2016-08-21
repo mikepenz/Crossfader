@@ -13,8 +13,8 @@ android {
         applicationId "com.mikepenz.crossfader.app"
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 137
-        versionName '1.3.7'
+        versionCode 150
+        versionName '1.5.0'
 
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
