@@ -1,13 +1,11 @@
 package com.mikepenz.crossfader.view;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 
 /**
  * SlidingPaneLayout that is partially visible, with cross fade.
@@ -61,16 +59,14 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
         if (!isOpen()) {
             enableDisableView(fullView, false);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            fullView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-                @Override
-                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    if (!isOpen()) {
-                        enableDisableView(v, false);
-                    }
+        fullView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (!isOpen()) {
+                    enableDisableView(v, false);
                 }
-            });
-        }
+            }
+        });
     }
 
     @Override
@@ -105,11 +101,6 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
         super.onLayout(changed, l, t, r, b);
 
         if (partialView != null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                // "changed" means that views were added or removed
-                // we need to move the partial view out of the way in any case (if it's supposed to of course)
-                updatePartialViewVisibilityPreHoneycomb(isOpen());
-            }
             partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
         }
     }
@@ -141,23 +132,8 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
     }
 
     public void setOffset(float slideOffset) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            if (slideOffset == 1 && !wasOpened) {
-                // the layout was just opened, move the partial view off screen
-                updatePartialViewVisibilityPreHoneycomb(true);
-                wasOpened = true;
-            } else if (slideOffset < 1 && wasOpened) {
-                // the layout just started to close, move the partial view back, so it can be shown animating
-                updatePartialViewVisibilityPreHoneycomb(false);
-                wasOpened = false;
-            }
-
-            updateAlphaApi10(partialView, 1 - slideOffset);
-            updateAlphaApi10(fullView, slideOffset);
-        } else {
-            partialView.setAlpha(1 - slideOffset);
-            fullView.setAlpha(slideOffset);
-        }
+        partialView.setAlpha(1 - slideOffset);
+        fullView.setAlpha(slideOffset);
         partialView.setVisibility(isOpen() ? View.GONE : VISIBLE);
 
         //if the fullView is hidden we prevent the click on all its views and subviews
@@ -181,35 +157,6 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
             for (int idx = 0; idx < group.getChildCount(); idx++) {
                 enableDisableView(group.getChildAt(idx), enabled);
             }
-        }
-    }
-
-    /**
-     * set the alpha on API 10 devices
-     *
-     * @param v
-     * @param value
-     */
-    private void updateAlphaApi10(View v, float value) {
-        AlphaAnimation alpha = new AlphaAnimation(value, value);
-        alpha.setDuration(0); // Make animation instant
-        alpha.setFillAfter(true); // Tell it to persist after the animation ends
-        v.startAnimation(alpha);
-    }
-
-    /**
-     * set the view visibility on pre honeycomb
-     *
-     * @param slidingPaneOpened
-     */
-    private void updatePartialViewVisibilityPreHoneycomb(boolean slidingPaneOpened) {
-        // below API 11 the top view must be moved so it does not consume clicks intended for the bottom view
-        // this applies curiously even when setting its visibility to GONE
-        // this might be due to platform limitations or it may have been introduced by NineOldAndroids library
-        if (slidingPaneOpened) {
-            partialView.layout(-partialView.getWidth(), 0, 0, partialView.getHeight());
-        } else {
-            partialView.layout(0, 0, partialView.getWidth(), partialView.getHeight());
         }
     }
 }
