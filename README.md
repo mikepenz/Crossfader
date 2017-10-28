@@ -1,4 +1,4 @@
-#Crossfader  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.mikepenz/crossfader/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.mikepenz/crossfader)
+# Crossfader  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.mikepenz/crossfader/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.mikepenz/crossfader)
 [![Join the chat at https://gitter.im/mikepenz/crossfader](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mikepenz/crossfader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Crossfader** is a small library to provide an easy to use and fast helper class for the great CrossFadeSlidingPaneLayout by @chiuki. 
@@ -9,8 +9,8 @@ It comes with following features:
  * No additional dependencies
 * No need to modify your layouts
 
-#Preview
-##Screenshots
+# Preview
+## Screenshots
 ![Image](https://raw.githubusercontent.com/mikepenz/Crossfader/develop/DEV/screenshots/screenshot1_small.png)
 ![Image](https://raw.githubusercontent.com/mikepenz/Crossfader/develop/DEV/screenshots/screenshot2_small.png)
 
@@ -22,11 +22,11 @@ It comes with following features:
 The Crossfader Library is pushed to [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.mikepenz%22), so you just need to add the following dependency to your `build.gradle`.
 
 ```javascript
-compile "com.mikepenz:crossfader:1.5.0@aar"
-compile "com.android.support:appcompat-v7:${supportLibVersion}"
+implementation "com.mikepenz:crossfader:1.5.1@aar"
+implementation "com.android.support:appcompat-v7:${supportLibVersion}"
 ```
 
-##How to use
+## How to use
 
 Initialize and create the Crossfader
 ```java
@@ -63,13 +63,13 @@ protected void onSaveInstanceState(Bundle outState) {
 }
 ```
 
-#Developed By
+# Developed By
 
 * Mike Penz 
  * [mikepenz.com](http://mikepenz.com) - <mikepenz@gmail.com>
  * [paypal.me/mikepenz](http://paypal.me/mikepenz)
 
-#License
+# License
 
     Copyright 2016 Mike Penz
 
