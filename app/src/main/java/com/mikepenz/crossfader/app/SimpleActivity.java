@@ -92,7 +92,7 @@ public class SimpleActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_third).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_fourth).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(4),
                         new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_fifth).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(5),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_sixth).withIcon(GoogleMaterial.Icon.gmd_car).withIdentifier(6),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_sixth).withIcon(GoogleMaterial.Icon.gmd_camera).withIdentifier(6),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_seventh).withIcon(FontAwesome.Icon.faw_github)
                 ) // add the items we want to use with our Drawer

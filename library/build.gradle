@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 27
         versionCode 150
         versionName '1.5.0'
     }
@@ -28,5 +28,5 @@ apply from: 'gradle-mvn-push.gradle'
 apply from: 'gradle-jcenter-push.gradle'
 
 dependencies {
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 }
