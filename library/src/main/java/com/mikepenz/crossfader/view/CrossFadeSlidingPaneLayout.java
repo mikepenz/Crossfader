@@ -151,6 +151,7 @@ public class CrossFadeSlidingPaneLayout extends SlidingPaneLayout implements ICr
      */
     private void enableDisableView(View view, boolean enabled) {
         view.setEnabled(enabled);
+        view.setFocusable(enabled);
         if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
 
