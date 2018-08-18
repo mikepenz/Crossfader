@@ -2,7 +2,7 @@ package com.mikepenz.crossfader.app;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.widget.SlidingPaneLayout;
+import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
