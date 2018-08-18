@@ -22,16 +22,18 @@ It comes with following features:
 The Crossfader Library is pushed to [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.mikepenz%22), so you just need to add the following dependency to your `build.gradle`.
 
 ```javascript
-implementation "com.mikepenz:crossfader:1.5.2@aar"
-implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+implementation "com.mikepenz:crossfader:1.6.0-rc01"
+implementation "androidx.appcompat:appcompat:${androidX}"
 ```
+
+To use appcompat please use a version smaller than 1.6.0. (See the releases on GitHub)
 
 ## How to use
 
 Initialize and create the Crossfader
 ```java
 crossFader = new Crossfader()
-	//provide the view which should be the main content
+	    //provide the view which should be the main content
         .withContent(findViewById(R.id.crossfade_content))
         //provide the view and it's width (in pixels) which should be displayed first
         .withFirst(result.getSlider(), firstWidth)
@@ -71,7 +73,7 @@ protected void onSaveInstanceState(Bundle outState) {
 
 # License
 
-    Copyright 2016 Mike Penz
+    Copyright 2018 Mike Penz
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
