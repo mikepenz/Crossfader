@@ -48,8 +48,8 @@ dependencies {
     implementation "androidx.cardview:cardview:${versions.androidX}"
     implementation "androidx.recyclerview:recyclerview:${versions.androidX}"
 
-    implementation "com.mikepenz:materialdrawer:6.1.0-rc01"
-    implementation "com.mikepenz:aboutlibraries:6.2.0-rc01"
+    implementation "com.mikepenz:materialdrawer:6.1.0"
+    implementation "com.mikepenz:aboutlibraries:6.2.0"
 
     implementation 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
     implementation 'com.mikepenz:fontawesome-typeface:5.0.13.0@aar'
