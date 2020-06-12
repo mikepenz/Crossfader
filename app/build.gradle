@@ -45,8 +45,8 @@ dependencies {
     implementation project(':library')
 
     implementation "androidx.appcompat:appcompat:${versions.androidX}"
-    implementation "androidx.cardview:cardview:${versions.androidX}"
-    implementation "androidx.recyclerview:recyclerview:${versions.androidX}"
+    implementation "androidx.cardview:cardview:${versions.cardView}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
 
     implementation "com.mikepenz:materialdrawer:6.1.0"
     implementation "com.mikepenz:aboutlibraries:6.2.0"

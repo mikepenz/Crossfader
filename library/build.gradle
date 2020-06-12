@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:${versions.androidX}"
+    implementation "androidx.slidingpanelayout:slidingpanelayout:${versions.slidingPaneLayout}"
 }
 
 apply from: '../gradle-release.gradle'

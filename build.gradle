@@ -6,14 +6,17 @@ buildscript {
         ]
 
         setup = [
-                compileSdk: 28,
-                buildTools: "28.0.2",
-                minSdk    : 14,
-                targetSdk : 28
+                compileSdk: 30,
+                buildTools: "30.0.0",
+                minSdk    : 16,
+                targetSdk : 30
         ]
 
         versions = [
-                androidX: '1.0.0'
+                androidX    : '1.2.0-rc01',
+                cardview    : '1.0.0',
+                recyclerView: '1.1.0',
+                slidingPaneLayout: '1.1.0-rc01'
         ]
     }
 
@@ -23,9 +26,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha11'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
 }
 
